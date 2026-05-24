@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/Urara">
       <QueryClientProvider client={queryClient}>
         <App />
       </QueryClientProvider>

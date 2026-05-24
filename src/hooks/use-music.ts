@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMusicFilters, filterMusic, getAlbum } from "../api";
-import type { MusicFilters } from "../types";
+import type { MusicFilters, MusicFilterResponse } from "../types";
 
 export const useMusicFilters = () => {
   return useQuery<MusicFilters>({
@@ -11,7 +11,7 @@ export const useMusicFilters = () => {
 };
 
 export const useMusicFilter = (params: Record<string, string>) => {
-  return useQuery({
+  return useQuery<MusicFilterResponse>({
     queryKey: ["music-filter", params],
     queryFn: () => filterMusic(params),
     enabled: Object.keys(params).length > 0,
