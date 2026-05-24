@@ -94,3 +94,50 @@ export interface MusicFilterResponse {
   albums: MusicAlbum[];
   tracks: Track[];
 }
+
+export interface CharacterDetail {
+  id: number;
+  game_id: number;
+  name_en: string;
+  name_jp: string;
+  name_en_internal: string;
+  preferred_url: string;
+  category_label: string;
+  category_label_en: string;
+  color_main: string;
+  color_sub: string;
+  thumb_img: string;
+  sns_icon: string;
+  sns_header: string;
+  detail_img_pc: string;
+  detail_img_sp: string;
+  profile: string;
+  slogan: string;
+  strengths: string;
+  weaknesses: string;
+  ears_fact: string;
+  tail_fact: string;
+  family_fact: string;
+  residence: string;
+  grade: string;
+  height: number;
+  weight: string;
+  size_b: number;
+  size_w: number;
+  size_h: number;
+  shoe_size: string;
+  birth_day: number;
+  birth_month: number;
+  voice: string;
+  link: string;
+  row_number: number;
+}
+
+export interface CharacterImageSet {
+  label: string;
+  label_en: string;
+  images: {
+    image: string;
+    uploaded: string;
+  }[];
+}
