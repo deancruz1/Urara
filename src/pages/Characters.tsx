@@ -6,6 +6,7 @@ import type {
   CharacterDetail,
   CharacterImageSet,
 } from "../types";
+import { Helmet } from "react-helmet-async";
 
 const Characters = () => {
   const { data: characters, isLoading } = useCharacterList();
@@ -30,6 +31,14 @@ const Characters = () => {
   if (characters && !selectedChar) {
     handleSelect(characters[0]);
   }
+
+  <Helmet>
+    <title>Characters | Urara</title>
+    <meta
+      name="description"
+      content="Browse all Umamusume Pretty Derby characters, their profiles, gallery, and voice samples."
+    />
+  </Helmet>;
 
   return (
     <div className="min-h-screen bg-bg-primary pt-16">

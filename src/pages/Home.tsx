@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useCharacterList, useCurrentBirthdays } from "../hooks";
 import Container from "../components/Container";
+import { Helmet } from "react-helmet-async";
 
 const HARU_URARA_URL =
   "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ab34862a2ae0421ca01b42c161761f21/haruurara_list.png";
@@ -9,6 +10,19 @@ const HARU_URARA_URL =
 const Home = () => {
   const { data: characters, isLoading } = useCharacterList();
   const { data: birthdays } = useCurrentBirthdays();
+
+  <Helmet>
+    <title>Home | Urara</title>
+    <meta
+      name="description"
+      content="Your complete guide to characters, music, and news from Umamusume Pretty Derby."
+    />
+    <meta property="og:title" content="Urara | Umamusume Pretty Derby" />
+    <meta
+      property="og:description"
+      content="Your complete guide to characters, music, and news from Umamusume Pretty Derby."
+    />
+  </Helmet>;
 
   return (
     <div className="min-h-screen bg-bg-primary">

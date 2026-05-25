@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMusicFilters, useMusicFilter } from "../hooks";
 import Container from "../components/Container";
 import type { Track } from "../types";
+import { Helmet } from "react-helmet-async";
 
 const DEFAULT_CHARACTER = "haru-urara";
 
@@ -29,6 +30,14 @@ const Music = () => {
       setPlayingUrl(url);
     }
   };
+
+  <Helmet>
+    <title>Music | Urara</title>
+    <meta
+      name="description"
+      content="Browse the Umamusume Pretty Derby discography, filter by character, and preview tracks."
+    />
+  </Helmet>;
 
   return (
     <div className="min-h-screen bg-bg-primary pt-24">

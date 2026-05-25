@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLatestNews, useNewsSearch } from "../hooks";
 import Container from "../components/Container";
 import type { NewsPost } from "../types";
+import { Helmet } from "react-helmet-async";
 
 const COUNT = 10;
 
@@ -60,6 +61,14 @@ const News = () => {
   const isSearching = search.length > 0;
   const posts = isSearching ? searchResults : latestNews;
   const isLoading = isSearching ? searchLoading : latestLoading;
+
+  <Helmet>
+    <title>News | Urara</title>
+    <meta
+      name="description"
+      content="Latest news and updates from Umamusume Pretty Derby."
+    />
+  </Helmet>;
 
   return (
     <div className="min-h-screen bg-bg-primary pt-24">
