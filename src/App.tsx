@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Characters from "./pages/Characters";
@@ -7,9 +7,12 @@ import News from "./pages/News";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   return (
     <>
-      <Navbar />
+      {!isHomePage && <Navbar />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

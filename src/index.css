@@ -8,6 +8,8 @@
   --text-secondary: #52525b;
   --border: #d4d4d8;
   --accent: #2563eb;
+  --home-nav-primary: #ffffff;
+  --home-nav-secondary: #f8fafc;
 }
 
 .dark {
@@ -18,6 +20,8 @@
   --text-secondary: #a1a1aa;
   --border: #3f3f46;
   --accent: #60a5fa;
+  --home-nav-primary: #1e1e2a;
+  --home-nav-secondary: #2a2a35;
 }
 
 @theme inline {
@@ -28,4 +32,26 @@
   --color-text-secondary: var(--text-secondary);
   --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-home-nav-primary: var(--home-nav-primary);
+  --color-home-nav-secondary: var(--home-nav-secondary);
+}
+
+:root {
+  --accent-color: #ec489a; /* default fallback */
+}
+
+.accent-color {
+  color: var(--accent-color);
+}
+
+.accent-bg {
+  background-color: var(--accent-color);
+}
+
+.accent-border {
+  border-color: var(--accent-color);
+}
+
+.accent-ring {
+  ring-color: var(--accent-color);
 }
