@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Characters from "./pages/Characters";
@@ -13,69 +12,6 @@ const App = () => {
 
   return (
     <>
-      <Helmet
-        defaultTitle="Urara - Umamusume Pretty Derby Fan Guide"
-        titleTemplate="%s | Urara"
-      >
-        {/* Primary Meta Tags */}
-        <meta
-          name="description"
-          content="A comprehensive fan guide for Umamusume Pretty Derby. Browse detailed horse girl profiles, listen to music tracks, catch up on news, and celebrate character birthdays."
-        />
-        <link rel="canonical" href="https://deancruz1.github.io/Urara" />
-
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="manifest" href="/site.webmanifest" />
-
-        {/* Open Graph / Facebook - Use a PNG here, not SVG */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://deancruz1.github.io/Urara" />
-        <meta
-          property="og:title"
-          content="Urara - Umamusume Pretty Derby Fan Guide"
-        />
-        <meta
-          property="og:description"
-          content="A comprehensive fan guide for Umamusume Pretty Derby. Browse detailed horse girl profiles, listen to music tracks, catch up on news, and celebrate character birthdays."
-        />
-        <meta
-          property="og:image"
-          content="https://deancruz1.github.io/Urara/og-image.webp"
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Urara Umamusume Fan Guide" />
-        <meta property="og:site_name" content="Urara Guide" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://deancruz1.github.io/Urara" />
-        <meta
-          name="twitter:title"
-          content="Urara - Umamusume Pretty Derby Fan Guide"
-        />
-        <meta
-          name="twitter:description"
-          content="A comprehensive fan guide for Umamusume Pretty Derby. Browse detailed horse girl profiles, listen to music tracks, catch up on news, and celebrate character birthdays."
-        />
-        <meta
-          name="twitter:image"
-          content="https://deancruz1.github.io/Urara/og-image.webp"
-        />
-        <meta name="twitter:image:alt" content="Urara Umamusume Fan Guide" />
-
-        {/* Additional SEO */}
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Dean Cruz" />
-        <meta
-          name="keywords"
-          content="Umamusume, Pretty Derby, horse girls, fan guide, characters, music, anime"
-        />
-
-        {/* Theme Color for browsers */}
-        <meta name="theme-color" content="#4f46e5" />
-      </Helmet>
-
       {!isHomePage && <Navbar />}
       <main>
         <Routes>
