@@ -1,0 +1,37 @@
+{
+  "name": "Urara - Umamusume Pretty Derby Fan Guide",
+  "short_name": "Urara",
+  "description": "A comprehensive fan guide for Umamusume Pretty Derby featuring character profiles, music tracks, and news.",
+  "start_url": "/Urara/",
+  "scope": "/Urara/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/Urara/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/Urara/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/Urara/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/Urara/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["entertainment", "reference"],
+  "lang": "en",
+  "dir": "ltr"
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://deancruz1.github.io/Urara/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://deancruz1.github.io/Urara/characters</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://deancruz1.github.io/Urara/music</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deancruz1.github.io/Urara/news</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>

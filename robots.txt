@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://deancruz1.github.io/Urara/sitemap.xml
