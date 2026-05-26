@@ -24,25 +24,7 @@ const App = () => {
         />
         <link rel="canonical" href="https://deancruz1.github.io/Urara" />
 
-        {/* Favicon & App Icons - Using your existing SVG and a fallback */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
         <link rel="manifest" href="/site.webmanifest" />
 
         {/* Open Graph / Facebook - Use a PNG here, not SVG */}
