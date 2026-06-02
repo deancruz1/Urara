@@ -8,6 +8,12 @@ import App from "./App.tsx";
 
 const queryClient = new QueryClient();
 
+const params = new URLSearchParams(window.location.search);
+const redirect = params.get("p");
+if (redirect) {
+  window.history.replaceState(null, "", redirect);
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider>
