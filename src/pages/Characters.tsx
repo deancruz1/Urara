@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useCharacterList, useCharacter, useCharacterImages } from "../hooks";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useRef, useEffect } from "react";
 import {
   CharacterSidebar,
@@ -19,6 +19,7 @@ import type {
 } from "../types";
 
 const Characters = () => {
+  const navigate = useNavigate();
   const selectedRef = useRef<HTMLButtonElement>(null);
   const [searchParams] = useSearchParams();
   const { data: characters, isLoading } = useCharacterList();
@@ -78,6 +79,7 @@ const Characters = () => {
     setSelectedChar(char);
     setShowTranslation(false);
     setGalleryIndex(0);
+    navigate(`/characters?id=${char.id}`, { replace: true });
   };
 
   if (filteredCharacters.length > 0 && !selectedChar) {
