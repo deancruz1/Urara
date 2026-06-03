@@ -40,3 +40,11 @@ export const useCurrentBirthdays = () => {
     staleTime: 1000 * 60 * 30, // 30 mins
   });
 };
+
+export const useCharacterInfo = () => {
+  return useQuery({
+    queryKey: ["characterInfo"],
+    queryFn: () =>
+      fetch("https://umapyoi.net/api/v1/character/info").then((r) => r.json()),
+  });
+};

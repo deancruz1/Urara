@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useCurrentBirthdays } from "../hooks";
 import Container from "../components/Container";
 import { Helmet } from "react-helmet-async";
 import heroBg from "../assets/home-hero.webp";
 import HomeNavbar from "../components/HomeNavbar";
+import { useNavigate } from "react-router-dom";
+import { useCurrentBirthdays, useCharacterInfo } from "../hooks";
 
 interface BirthdayCharacter {
   birth_day: number;
@@ -85,10 +86,14 @@ const featuredTracks = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const { data: birthdaysData } = useCurrentBirthdays();
   const birthdays = birthdaysData as BirthdaysResponse | undefined;
   const [activeTab, setActiveTab] = useState<"today" | "calendar">("today");
   const [playingTrackId, setPlayingTrackId] = useState<number | null>(null);
+
+  const { data: characterInfo } = useCharacterInfo();
 
   // Get current date
   const today = new Date();
@@ -96,22 +101,15 @@ const Home = () => {
   const currentDay = today.getDate();
 
   // Group birthdays by month for calendar view
-  const allBirthdays = birthdays
-    ? [
-        ...(birthdays.current_birthdays || []),
-        ...(birthdays.next_birthdays || []),
-      ]
-    : [];
-
-  const birthdaysByMonth = allBirthdays.reduce(
-    (acc: Record<number, BirthdayCharacter[]>, char) => {
-      const month = char.birth_month;
-      if (!acc[month]) acc[month] = [];
-      acc[month].push(char);
-      return acc;
-    },
-    {},
-  );
+  const birthdaysByMonth =
+    (characterInfo as BirthdayCharacter[] | undefined)
+      ?.filter((c) => c.birth_month != null)
+      .reduce((acc: Record<number, BirthdayCharacter[]>, char) => {
+        const month = char.birth_month;
+        if (!acc[month]) acc[month] = [];
+        acc[month].push(char);
+        return acc;
+      }, {}) ?? {};
 
   const monthNames = [
     "January",
@@ -221,11 +219,11 @@ const Home = () => {
                     </p>
                   </div>
                 ) : (
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-4 cursor-pointer">
                     {todaysBirthdays.map((char) => (
-                      <Link
+                      <div
                         key={char.id}
-                        to={`/characters/${char.id}`}
+                        onClick={() => navigate(`/characters?id=${char.id}`)}
                         className="flex items-center gap-3 rounded-xl bg-bg-secondary p-4 transition-transform hover:scale-105 flex-1 min-w-[200px]"
                       >
                         <img
@@ -241,7 +239,7 @@ const Home = () => {
                             {char.name_jp}
                           </p>
                         </div>
-                      </Link>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -251,14 +249,16 @@ const Home = () => {
             {/* Birthday Calendar Tab - Full Width List */}
             {activeTab === "calendar" && (
               <>
-                {!birthdays ? (
+                {!characterInfo ? (
                   <p className="text-text-secondary">Loading birthdays...</p>
                 ) : (
                   <div className="flex flex-col gap-8 w-full">
                     {monthNames.map((month, index) => {
                       const monthNumber = index + 1;
-                      const monthBirthdays = birthdaysByMonth[monthNumber];
-
+                      if (monthNumber !== currentMonth) return null;
+                      const monthBirthdays = birthdaysByMonth[
+                        monthNumber
+                      ]?.filter((c) => c.birth_day >= currentDay);
                       if (!monthBirthdays || monthBirthdays.length === 0)
                         return null;
 
@@ -278,10 +278,12 @@ const Home = () => {
                                   monthNumber === currentMonth &&
                                   char.birth_day === currentDay;
                                 return (
-                                  <Link
+                                  <div
                                     key={char.id}
-                                    to={`/characters/${char.id}`}
-                                    className={`flex items-center gap-3 rounded-xl bg-bg-tertiary p-4 transition-transform hover:scale-105 flex-1 min-w-[200px] ${
+                                    onClick={() =>
+                                      navigate(`/characters?id=${char.id}`)
+                                    }
+                                    className={`flex items-center gap-3 rounded-xl bg-bg-tertiary p-4 cursor-pointer transition-transform hover:scale-105 flex-1 md:max-w-[250px] lg:flex-none lg:max-w-[220px] min-w-[200px] ${
                                       isToday
                                         ? "ring-2 ring-accent bg-accent/5"
                                         : ""
@@ -310,13 +312,28 @@ const Home = () => {
                                         </span>
                                       )}
                                     </div>
-                                  </Link>
+                                  </div>
                                 );
                               })}
                           </div>
                         </div>
                       );
                     })}
+                    {characterInfo &&
+                      (
+                        birthdaysByMonth[currentMonth]?.filter(
+                          (c) => c.birth_day >= currentDay,
+                        ) ?? []
+                      ).length === 0 && (
+                        <div className="text-center py-12">
+                          <p className="text-text-secondary">
+                            No more birthdays in {monthNames[currentMonth - 1]}.
+                          </p>
+                          <p className="text-text-secondary text-sm mt-2">
+                            Check back in {monthNames[currentMonth % 12]}!
+                          </p>
+                        </div>
+                      )}
                   </div>
                 )}
               </>

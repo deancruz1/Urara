@@ -1,4 +1,5 @@
 import type { CharacterListItem } from "../../types";
+import type { RefObject } from "react";
 
 interface CharacterSidebarProps {
   characters: CharacterListItem[];
@@ -7,6 +8,7 @@ interface CharacterSidebarProps {
   isLoading: boolean;
   onSearch: (query: string) => void;
   onSelect: (char: CharacterListItem) => void;
+  selectedRef: RefObject<HTMLButtonElement | null>;
 }
 
 export const CharacterSidebar = ({
@@ -16,6 +18,7 @@ export const CharacterSidebar = ({
   isLoading,
   onSearch,
   onSelect,
+  selectedRef,
 }: CharacterSidebarProps) => (
   <div className="flex w-full shrink-0 flex-col border-b border-border lg:w-72 lg:border-b-0 lg:border-r">
     <div className="px-4 pb-2 pt-6">
@@ -38,6 +41,7 @@ export const CharacterSidebar = ({
           characters.map((char) => (
             <button
               key={char.id}
+              ref={selectedChar?.id === char.id ? selectedRef : null}
               onClick={() => onSelect(char)}
               className={`flex shrink-0 cursor-pointer items-center gap-3 rounded-xl p-2 transition-colors duration-200 lg:w-full ${
                 selectedChar?.id === char.id

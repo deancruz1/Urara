@@ -2,6 +2,8 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useCharacterList, useCharacter, useCharacterImages } from "../hooks";
+import { useSearchParams } from "react-router-dom";
+import { useRef, useEffect } from "react";
 import {
   CharacterSidebar,
   CharacterHero,
@@ -17,6 +19,8 @@ import type {
 } from "../types";
 
 const Characters = () => {
+  const selectedRef = useRef<HTMLButtonElement>(null);
+  const [searchParams] = useSearchParams();
   const { data: characters, isLoading } = useCharacterList();
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedChar, setSelectedChar] = useState<CharacterListItem | null>(
@@ -77,8 +81,21 @@ const Characters = () => {
   };
 
   if (filteredCharacters.length > 0 && !selectedChar) {
-    handleSelect(filteredCharacters[0]);
+    const targetId = searchParams.get("id");
+    const target = targetId
+      ? filteredCharacters.find((c) => c.id === Number(targetId))
+      : filteredCharacters[0];
+    handleSelect(target ?? filteredCharacters[0]);
   }
+
+  useEffect(() => {
+    if (selectedRef.current) {
+      selectedRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [selectedChar?.id]);
 
   return (
     <>
@@ -99,6 +116,7 @@ const Characters = () => {
             isLoading={isLoading}
             onSearch={setSearchQuery}
             onSelect={handleSelect}
+            selectedRef={selectedRef}
           />
 
           <div className="flex-1 overflow-y-auto">
