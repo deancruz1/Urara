@@ -65,7 +65,7 @@ export const Dialog = ({
       onClick={(e) => {
         if (e.target === e.currentTarget) ref.current?.close();
       }}
-      className={`m-auto max-h-[90vh] max-w-[min(56rem,calc(100vw-2rem))] p-0 backdrop:bg-ink/80 ${className}`}
+      className={`m-auto max-h-[90vh] max-w-[min(56rem,calc(100vw-2rem))] p-0 backdrop:bg-[rgb(17_21_17/0.8)] ${className}`}
     >
       {open && (
         <div className="relative">

@@ -110,3 +110,22 @@
     animation: none;
   }
 }
+
+/* Sanitised news post bodies (see lib/sanitize.ts) */
+.news-body img {
+  max-width: 100%;
+  height: auto;
+}
+.news-body ul,
+.news-body ol {
+  padding-left: 1.5em;
+}
+.news-body ul {
+  list-style: disc;
+}
+.news-body ol {
+  list-style: decimal;
+}
+.news-body a {
+  text-decoration: underline;
+}

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { SectionHeading } from "../ui";
-import { isJapanese, textOn } from "../../lib/color";
+import { isJapanese } from "../../lib/color";
+import { LabelChip } from "../news";
 import { newsMMDD } from "../../lib/format";
 import type { NewsPost } from "../../types";
 
@@ -9,15 +10,6 @@ interface Props {
   isLoading: boolean;
   isError: boolean;
 }
-
-export const LabelChip = ({ post, className = "" }: { post: NewsPost; className?: string }) => (
-  <span
-    className={`inline-block px-1.5 py-px text-[11px] font-bold uppercase ${className}`}
-    style={{ backgroundColor: post.label_color, color: textOn(post.label_color) }}
-  >
-    {post.label_name_en}
-  </span>
-);
 
 export const NewsPreview = ({ posts, isLoading, isError }: Props) => (
   <section className="min-w-0 flex-[1_1_400px]" aria-labelledby="news-heading">
