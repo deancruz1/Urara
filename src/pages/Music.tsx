@@ -1,64 +1,64 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useMusicFilters, useMusicFilter, useCharacterList } from "../hooks";
-import Container from "../components/Container";
 import {
-  MusicHeader,
-  CharacterFilter,
-  TrackList,
-  MusicPlayer,
-} from "../components/music";
+  useAudioPreview,
+  useCharacterList,
+  useMusicFilter,
+  useMusicFilters,
+} from "../hooks";
+import { SectionHeading } from "../components/ui";
+import { MusicFilter, SongList } from "../components/music";
 
 const DEFAULT_CHARACTER = "haru-urara";
 
 const Music = () => {
-  const [selectedCharacter, setSelectedCharacter] = useState(DEFAULT_CHARACTER);
+  const [selected, setSelected] = useState(DEFAULT_CHARACTER);
   const [search, setSearch] = useState("");
-  const [playingUrl, setPlayingUrl] = useState<string | null>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const { playingId, progress, toggle, stop } = useAudioPreview();
+
   const { data: characterList } = useCharacterList();
+  const filters = useMusicFilters();
+  const music = useMusicFilter({ character: selected });
 
-  const { data: filters, isLoading: filtersLoading } = useMusicFilters();
-  const { data: musicData, isLoading: tracksLoading } = useMusicFilter(
-    selectedCharacter ? { character: selectedCharacter } : {},
+  const imageByName = useMemo(
+    () => new Map((characterList ?? []).map((c) => [c.name_en, c.thumb_img])),
+    [characterList],
   );
+  const selectedName =
+    filters.data?.character.find((c) => c.id === selected)?.display ?? "Haru Urara";
 
-  useEffect(() => {
-    const checkDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-    checkDesktop();
-    window.addEventListener("resize", checkDesktop);
-    return () => window.removeEventListener("resize", checkDesktop);
-  }, []);
-
-  const tracks = useMemo(() => musicData?.tracks ?? [], [musicData]);
-  const filteredTracks = useMemo(
+  const tracks = useMemo(() => music.data?.tracks ?? [], [music.data]);
+  const q = search.trim().toLowerCase();
+  const shown = useMemo(
     () =>
-      search
-        ? tracks.filter((t) =>
-            t.name_en.toLowerCase().includes(search.toLowerCase()),
+      q
+        ? tracks.filter(
+            (t) =>
+              (t.name_en ?? "").toLowerCase().includes(q) ||
+              (t.name_jp ?? "").toLowerCase().includes(q),
           )
         : tracks,
-    [tracks, search],
+    [tracks, q],
   );
 
-  const handlePlay = (url: string) => {
-    if (playingUrl === url) {
-      setPlayingUrl(null);
-    } else {
-      setPlayingUrl(url);
-    }
+  const select = (id: string) => {
+    if (id === selected) return;
+    stop();
+    setSelected(id);
   };
 
-  // Build a map of character display name -> image
-  const characterImageMap = useMemo(() => {
-    const map = new Map();
-    characterList?.forEach((char) => {
-      map.set(char.name_en, char.thumb_img);
-    });
-    return map;
-  }, [characterList]);
+  let body: React.ReactNode;
+  if (music.isError) {
+    body = <p className="mt-4 text-ink-sub">The songs couldn't be loaded. Try again later.</p>;
+  } else if (music.isLoading) {
+    body = <p className="mt-4 min-h-60 text-ink-sub">Loading songs…</p>;
+  } else if (tracks.length === 0) {
+    body = <p className="mt-4 text-ink-sub">{selectedName} has no songs yet.</p>;
+  } else if (shown.length === 0) {
+    body = <p className="mt-4 text-ink-sub">No songs match “{search.trim()}”.</p>;
+  } else {
+    body = <SongList tracks={shown} playingId={playingId} progress={progress} onToggle={toggle} />;
+  }
 
   return (
     <>
@@ -66,80 +66,50 @@ const Music = () => {
         <title>Music | Urara</title>
         <meta
           name="description"
-          content="Browse the Umamusume Pretty Derby discography, filter by character, and preview tracks."
+          content="Browse Umamusume Pretty Derby songs by the character who sings them, search by title, and play previews."
         />
       </Helmet>
 
-      <div className="min-h-screen bg-bg-primary pt-24">
-        <Container>
-          <MusicHeader search={search} onSearchChange={setSearch} />
+      <div className="wrap pt-8">
+        <SectionHeading level={1} title="Music" ja="楽曲" />
+        <p className="mt-3 mb-0 max-w-[60ch] text-ink-sub">
+          Pick a character to see the songs she sings, then play a short preview.
+        </p>
+      </div>
 
-          {/* Desktop: Full viewport height layout */}
-          {isDesktop ? (
-            <div className="-mx-4" style={{ height: "calc(100vh - 280px)" }}>
-              <div className="flex h-full gap-8 px-4 pb-12">
-                {/* Character Filter - Scrollable */}
-                <div className="w-64 shrink-0 flex flex-col h-full">
-                  <p className="mb-4 text-sm font-bold tracking-widest text-accent uppercase">
-                    Filter by Character
-                  </p>
-                  <div className="flex-1 overflow-y-auto">
-                    <CharacterFilter
-                      characters={filters?.character || []}
-                      selectedCharacter={selectedCharacter}
-                      characterImageMap={characterImageMap}
-                      isLoading={filtersLoading}
-                      onSelect={setSelectedCharacter}
-                      isDesktop={true}
-                    />
-                  </div>
-                </div>
-
-                {/* Track List - Scrollable */}
-                <div className="flex-1 flex flex-col h-full min-w-0">
-                  <TrackList
-                    tracks={filteredTracks}
-                    playingUrl={playingUrl}
-                    onPlay={handlePlay}
-                    isLoading={tracksLoading}
-                  />
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Mobile/Tablet: Horizontal scroll layout */
-            <div className="flex flex-col gap-8">
-              {/* Character Filter - Horizontal scroll */}
-              <div>
-                <p className="mb-4 text-sm font-bold tracking-widest text-accent uppercase">
-                  Filter by Character
-                </p>
-                <CharacterFilter
-                  characters={filters?.character || []}
-                  selectedCharacter={selectedCharacter}
-                  characterImageMap={characterImageMap}
-                  isLoading={filtersLoading}
-                  onSelect={setSelectedCharacter}
-                  isDesktop={false}
-                />
-              </div>
-
-              {/* Track List - Scrollable */}
-              <TrackList
-                tracks={filteredTracks}
-                playingUrl={playingUrl}
-                onPlay={handlePlay}
-                isLoading={tracksLoading}
-                isMobile={true}
-              />
-            </div>
-          )}
-        </Container>
-
-        <MusicPlayer
-          playingUrl={playingUrl}
-          onEnded={() => setPlayingUrl(null)}
+      <div className="wrap flex flex-col items-start gap-6 pt-6 lg:flex-row lg:gap-8">
+        <MusicFilter
+          characters={filters.data?.character ?? []}
+          imageByName={imageByName}
+          selected={selected}
+          onSelect={select}
+          isLoading={filters.isLoading}
+          isError={filters.isError}
         />
+
+        <section className="w-full min-w-0 flex-1" aria-labelledby="songs-heading">
+          <div className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1 border-b-[3px] border-ink pb-1.5">
+            <h2 id="songs-heading" className="m-0 font-cond text-[26px] font-extrabold uppercase leading-none">
+              {selectedName}
+            </h2>
+            <span className="font-cond text-lg font-bold tabular-nums" aria-live="polite">
+              {music.data ? `${q ? `${shown.length} of ` : ""}${tracks.length} ${tracks.length === 1 ? "song" : "songs"}` : ""}
+            </span>
+          </div>
+          <label htmlFor="song-search" className="mt-4 block text-xs font-bold text-ink-sub">
+            Search {selectedName}'s songs by title
+          </label>
+          <input
+            id="song-search"
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="English or Japanese title"
+            autoComplete="off"
+            className="mt-1 block h-12 w-full border-[3px] border-ink bg-paper px-3 outline-none focus-visible:bg-tint"
+          />
+          {body}
+        </section>
       </div>
     </>
   );

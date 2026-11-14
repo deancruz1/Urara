@@ -6,8 +6,8 @@ interface SectionHeadingProps {
   ja: string;
   /** Optional single link to the full view, shown at the end of the line. */
   link?: { to: string; label: string };
-  /** `h2` for page sections, `h3` for sub-sections (smaller). */
-  level?: 2 | 3;
+  /** `h1` page title or `h2` section (large); `h3` sub-section (smaller). */
+  level?: 1 | 2 | 3;
   id?: string;
   children?: ReactNode;
 }
@@ -20,8 +20,8 @@ export const SectionHeading = ({
   id,
   children,
 }: SectionHeadingProps) => {
-  const Tag = level === 2 ? "h2" : "h3";
-  const big = level === 2;
+  const Tag = (["h1", "h2", "h3"] as const)[level - 1];
+  const big = level !== 3;
   return (
     <div
       className={`flex flex-wrap items-baseline border-b-[3px] border-ink ${
