@@ -85,3 +85,9 @@
 .accent-ring {
   ring-color: var(--accent-color);
 }
+
+@layer base {
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
