@@ -28,6 +28,8 @@ export const NewsPostDialog = ({ post, onClose }: Props) => {
             <img
               src={post.image}
               alt=""
+              loading="lazy"
+              decoding="async"
               width={768}
               height={384}
               className="block aspect-[2/1] h-auto w-full border-b-[3px] border-ink bg-tint object-cover"

@@ -104,6 +104,8 @@ export const OutfitGallery = ({ sets, name }: Props) => {
         <img
           src={image.image}
           alt={alt}
+          loading="lazy"
+          decoding="async"
           width={800}
           height={1000}
           className="block h-auto max-h-[90vh] w-auto max-w-full object-contain"

@@ -65,7 +65,7 @@ export const CharacterList = ({
         onChange={(e) => onSearch(e.target.value)}
         placeholder="Name, ウララ, or category"
         autoComplete="off"
-        className="block h-12 w-full shrink-0 border-0 border-b-[3px] border-ink bg-paper px-3 outline-none focus-visible:bg-tint"
+        className="block h-12 w-full shrink-0 border-0 border-b-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
       />
       <p role="status" className="sr-only">
         {searching && !isLoading ? `${characters.length} characters match` : ""}

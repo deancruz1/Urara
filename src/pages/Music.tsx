@@ -106,7 +106,7 @@ const Music = () => {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="English or Japanese title"
             autoComplete="off"
-            className="mt-1 block h-12 w-full border-[3px] border-ink bg-paper px-3 outline-none focus-visible:bg-tint"
+            className="mt-1 block h-12 w-full border-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
           />
           {body}
         </section>
