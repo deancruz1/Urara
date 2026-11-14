@@ -30,9 +30,9 @@ export const NewsPostDialog = ({ post, onClose }: Props) => {
               alt=""
               loading="lazy"
               decoding="async"
-              width={768}
-              height={384}
-              className="block aspect-[2/1] h-auto w-full border-b-[3px] border-ink bg-tint object-cover"
+              width={936}
+              height={228}
+              className="block h-auto w-full border-b-[3px] border-ink bg-tint"
             />
           )}
           <div className="px-5 pt-5 pb-7 sm:px-7">
