@@ -3,9 +3,9 @@ import {
   getCharacterList,
   getCharacter,
   getCharacterImages,
-  getCurrentBirthdays,
+  getCharacterInfo,
 } from "../api";
-import type { CharacterListItem } from "../types";
+import type { CharacterInfo, CharacterListItem } from "../types";
 
 export const useCharacterList = () => {
   return useQuery<CharacterListItem[]>({
@@ -33,18 +33,10 @@ export const useCharacterImages = (charaId: number) => {
   });
 };
 
-export const useCurrentBirthdays = () => {
-  return useQuery({
-    queryKey: ["birthdays"],
-    queryFn: getCurrentBirthdays,
-    staleTime: 1000 * 60 * 30, // 30 mins
-  });
-};
-
 export const useCharacterInfo = () => {
-  return useQuery({
+  return useQuery<CharacterInfo[]>({
     queryKey: ["characterInfo"],
-    queryFn: () =>
-      fetch("https://umapyoi.net/api/v1/character/info").then((r) => r.json()),
+    queryFn: getCharacterInfo,
+    staleTime: 1000 * 60 * 60, // 1 hour
   });
 };

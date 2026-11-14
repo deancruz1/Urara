@@ -141,3 +141,22 @@ export interface CharacterImageSet {
     uploaded: string;
   }[];
 }
+
+// Every character with birthday, colours and portraits (from /api/v1/character/info)
+export interface CharacterInfo {
+  id: number;
+  game_id: number | null;
+  name_en: string;
+  name_jp: string;
+  preferred_url: string;
+  category_label: string;
+  category_label_en: string;
+  color_main: string;
+  color_sub: string;
+  thumb_img: string | null;
+  sns_icon: string | null;
+  birth_month: number | null;
+  birth_day: number | null;
+  height: number | null;
+  row_number: number;
+}

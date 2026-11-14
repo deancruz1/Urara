@@ -24,8 +24,8 @@ export const getCharacterMovies = async (charaId: number) => {
   return res.json()
 }
 
-export const getCurrentBirthdays = async () => {
-  const res = await fetch(`${BASE_URL}/character/currentbirthdays`)
-  if (!res.ok) throw new Error('Failed to fetch birthdays')
+export const getCharacterInfo = async () => {
+  const res = await fetch(`${BASE_URL}/character/info`)
+  if (!res.ok) throw new Error('Failed to fetch character info')
   return res.json()
 }
