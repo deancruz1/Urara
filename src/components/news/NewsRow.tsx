@@ -29,7 +29,7 @@ export const NewsRow = ({ post, onOpen }: Props) => {
             {title}
           </span>
         </span>
-        {post.image ? (
+        {post.image && (
           <img
             src={post.image}
             alt=""
@@ -39,8 +39,6 @@ export const NewsRow = ({ post, onOpen }: Props) => {
             decoding="async"
             className="block aspect-[936/228] w-full max-w-[320px] bg-tint object-cover sm:w-[200px]"
           />
-        ) : (
-          <span aria-hidden="true" className="hidden aspect-[936/228] w-[200px] bg-tint sm:block" />
         )}
       </button>
     </li>
