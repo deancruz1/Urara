@@ -28,7 +28,7 @@ export const FeaturedField = ({ characters, isLoading, isError, today }: Props) 
         link={{ to: "/characters", label: characters ? `All ${characters.length}` : "All characters" }}
       />
       {isError ? (
-        <p className="mt-6 text-ink-sub">This week's field couldn't be loaded. Try again later.</p>
+        <p className="mt-6 text-ink-sub">Couldn't load this week's field.</p>
       ) : isLoading || !characters ? (
         <p className="mt-6 min-h-60 text-ink-sub">Loading this week's field…</p>
       ) : (

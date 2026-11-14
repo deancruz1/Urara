@@ -73,7 +73,7 @@ export const CharacterList = ({
 
       {isError ? (
         <p className="m-0 px-3 py-3 text-sm text-ink-sub">
-          The character list couldn't be loaded. Try again later.
+          Couldn't load characters.
         </p>
       ) : isLoading ? (
         <p className="m-0 px-3 py-3 text-sm text-ink-sub">Loading characters…</p>

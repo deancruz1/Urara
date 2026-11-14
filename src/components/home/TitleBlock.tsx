@@ -32,10 +32,6 @@ export const TitleBlock = ({ count, nextBirthday, latestNews }: TitleBlockProps)
         <h1 className="m-0 font-cond text-[clamp(40px,6vw,70px)] font-extrabold uppercase leading-[0.92] text-balance">
           Umamusume Pretty Derby fan guide
         </h1>
-        <p className="mt-3 mb-0 max-w-[60ch] text-ink-sub">
-          Profiles, voice lines, songs and birthdays for every Umamusume, from
-          the Umapyoi community database.
-        </p>
       </div>
       <dl className="m-0 grid flex-[1_1_260px] grid-cols-[auto_1fr] content-center gap-x-4 gap-y-1.5 border-ink px-5.5 py-4.5 max-[47rem]:border-t-[3px] min-[47rem]:flex-[0_1_260px] min-[47rem]:border-l-[3px]">
         <Stat ja="次の誕生日" value={nextBirthday} />

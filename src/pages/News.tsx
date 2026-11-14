@@ -66,13 +66,13 @@ const News = () => {
 
   let body: React.ReactNode;
   if (active.isError) {
-    body = <p className="mt-4 text-ink-sub">The news couldn't be loaded. Try again later.</p>;
+    body = <p className="mt-4 text-ink-sub">Couldn't load news.</p>;
   } else if (active.isLoading || (searching && search.trim() !== query)) {
     body = <p className="mt-4 min-h-60 text-ink-sub">{searching ? "Searching…" : "Loading news…"}</p>;
   } else if (posts.length === 0) {
     body = (
       <p className="mt-4 text-ink-sub">
-        {searching ? `No news matches “${query}”.` : "There's no news to show."}
+        {searching ? `No news matches “${query}”.` : "No news."}
       </p>
     );
   } else {
@@ -106,11 +106,7 @@ const News = () => {
 
       <section className="wrap pt-8" aria-labelledby="news-title">
         <SectionHeading level={1} id="news-title" title="News" ja="お知らせ" />
-        <p className="mt-3 mb-0 max-w-[60ch] text-ink-sub">
-          Official Umamusume announcements, newest first, with English titles
-          where available.
-        </p>
-        <label htmlFor="news-search" className="mt-6 block text-xs font-bold text-ink-sub">
+        <label htmlFor="news-search" className="sr-only">
           Search the news
         </label>
         <input
@@ -118,9 +114,9 @@ const News = () => {
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="e.g. Tachyon"
+          placeholder="Search news"
           autoComplete="off"
-          className="mt-1 mb-2 block h-12 w-full border-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
+          className="mt-6 mb-2 block h-12 w-full border-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
         />
         {body}
       </section>

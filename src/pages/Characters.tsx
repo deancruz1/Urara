@@ -64,8 +64,7 @@ const Characters = () => {
         >
           {isError ? (
             <p className="m-0 text-ink-sub">
-              Character data couldn't be loaded. Check your connection and try
-              again.
+              Couldn't load characters.
             </p>
           ) : selected ? (
             <CharacterProfile

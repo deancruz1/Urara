@@ -39,8 +39,7 @@ export const CharacterProfile = ({ character, onReady }: Props) => {
         <div className="flex min-w-0 flex-[1_1_380px] flex-col gap-7">
           {detail.isError ? (
             <p className="m-0 text-ink-sub">
-              This profile couldn't be loaded. Try again later, or pick another
-              character.
+              Couldn't load this profile.
             </p>
           ) : detail.isLoading || !d ? (
             <p className="m-0 min-h-60 text-ink-sub">Loading profile…</p>

@@ -143,10 +143,6 @@ export const NoProfileYet = () => (
     <p className="m-0 font-cond text-[22px] font-bold uppercase leading-tight">
       No English profile yet
     </p>
-    <p className="mt-1 mb-0 text-ink-sub">
-      Umapyoi hasn't published an English profile for this character. It adds
-      them once a translation is available.
-    </p>
   </div>
 );
 

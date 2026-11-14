@@ -49,7 +49,7 @@ const Music = () => {
 
   let body: React.ReactNode;
   if (music.isError) {
-    body = <p className="mt-4 text-ink-sub">The songs couldn't be loaded. Try again later.</p>;
+    body = <p className="mt-4 text-ink-sub">Couldn't load songs.</p>;
   } else if (music.isLoading) {
     body = <p className="mt-4 min-h-60 text-ink-sub">Loading songs…</p>;
   } else if (tracks.length === 0) {
@@ -72,9 +72,6 @@ const Music = () => {
 
       <div className="wrap pt-8">
         <SectionHeading level={1} title="Music" ja="楽曲" />
-        <p className="mt-3 mb-0 max-w-[60ch] text-ink-sub">
-          Pick a character to see the songs she sings, then play a short preview.
-        </p>
       </div>
 
       <div className="wrap flex flex-col items-start gap-6 pt-6 lg:flex-row lg:gap-8">
@@ -96,7 +93,7 @@ const Music = () => {
               {music.data ? `${q ? `${shown.length} of ` : ""}${tracks.length} ${tracks.length === 1 ? "song" : "songs"}` : ""}
             </span>
           </div>
-          <label htmlFor="song-search" className="mt-4 block text-xs font-bold text-ink-sub">
+          <label htmlFor="song-search" className="sr-only">
             Search {selectedName}'s songs by title
           </label>
           <input
@@ -104,9 +101,9 @@ const Music = () => {
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="English or Japanese title"
+            placeholder="Search songs"
             autoComplete="off"
-            className="mt-1 block h-12 w-full border-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
+            className="mt-4 block h-12 w-full border-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
           />
           {body}
         </section>

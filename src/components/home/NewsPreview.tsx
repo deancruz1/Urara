@@ -20,7 +20,7 @@ export const NewsPreview = ({ posts, isLoading, isError }: Props) => (
       link={{ to: "/news", label: "All news" }}
     />
     {isError ? (
-      <p className="mt-4 text-ink-sub">The news couldn't be loaded. Try again later.</p>
+      <p className="mt-4 text-ink-sub">Couldn't load news.</p>
     ) : isLoading || !posts ? (
       <p className="mt-4 text-ink-sub">Loading news…</p>
     ) : (

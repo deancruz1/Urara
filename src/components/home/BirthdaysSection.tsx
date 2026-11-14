@@ -52,14 +52,13 @@ const Featured = ({ c, date }: { c: CharacterInfo; date?: string }) => (
 export const BirthdaysSection = ({ characters, isLoading, isError, today }: Props) => {
   let body: React.ReactNode;
   if (isError) {
-    body = <p className="mt-6 text-ink-sub">Birthdays couldn't be loaded. Try again later.</p>;
+    body = <p className="mt-6 text-ink-sub">Couldn't load birthdays.</p>;
   } else if (isLoading || !characters) {
     body = <p className="mt-6 min-h-60 text-ink-sub">Loading birthdays…</p>;
   } else {
     const todays = todaysBirthdays(characters, today);
     const queue = upcomingGroups(characters, today, 6);
     const next = queue[0];
-    const withDate = characters.filter((c) => c.birth_month && c.birth_day).length;
 
     body = (
       <>
@@ -68,7 +67,7 @@ export const BirthdaysSection = ({ characters, isLoading, isError, today }: Prop
             {todays.length > 0 ? (
               <>
                 <p className="m-0 text-ink-sub">
-                  Happy birthday! Today, {mmdd(today.month, today.day)}:
+                  Today, {mmdd(today.month, today.day)}
                 </p>
                 <ul className="m-0 mt-4 flex list-none flex-col gap-4 p-0">
                   {todays.map((c) => (
@@ -167,7 +166,7 @@ export const BirthdaysSection = ({ characters, isLoading, isError, today }: Prop
           </div>
         </div>
 
-        <MonthChart characters={characters} withDate={withDate} month={today.month} />
+        <MonthChart characters={characters} month={today.month} />
       </>
     );
   }

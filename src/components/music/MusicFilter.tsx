@@ -42,7 +42,7 @@ export const MusicFilter = ({ characters, imageByName, selected, onSelect, isLoa
         <span lang="ja">歌唱</span>
       </h2>
       {isError ? (
-        <p className="m-0 px-3 py-3 text-sm text-ink-sub">The character filter couldn't be loaded.</p>
+        <p className="m-0 px-3 py-3 text-sm text-ink-sub">Couldn't load characters.</p>
       ) : isLoading ? (
         <p className="m-0 px-3 py-3 text-sm text-ink-sub">Loading characters…</p>
       ) : (

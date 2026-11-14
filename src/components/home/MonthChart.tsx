@@ -6,12 +6,11 @@ const BAR_MAX = 120;
 
 interface Props {
   characters: CharacterInfo[];
-  withDate: number;
   /** Current JST month, 1–12. */
   month: number;
 }
 
-export const MonthChart = ({ characters, withDate, month }: Props) => {
+export const MonthChart = ({ characters, month }: Props) => {
   const counts = countsByMonth(characters);
   const max = Math.max(1, ...counts);
   const label = `Birthdays per month: ${counts
@@ -57,11 +56,6 @@ export const MonthChart = ({ characters, withDate, month }: Props) => {
           </span>
         ))}
       </div>
-      <figcaption className="mt-3 max-w-[70ch] text-[13px] text-ink-sub">
-        Birthdays per month for the {withDate} characters with a listed date.
-        Real racehorses are foaled in spring, so March and April are crowded
-        and the autumn months are close to empty.
-      </figcaption>
     </figure>
   );
 };
