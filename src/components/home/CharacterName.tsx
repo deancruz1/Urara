@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 
 /** A character's name as a link to her profile. */
 export const ProfileLink = ({
-  id,
+  slug,
   children,
   className = "",
 }: {
-  id: number;
+  slug: string;
   children: React.ReactNode;
   className?: string;
 }) => (
   <Link
-    to={`/characters?id=${id}`}
+    to={`/characters/${slug}`}
     className={`text-ink no-underline hover:text-turf-dark hover:underline ${className}`}
   >
     {children}

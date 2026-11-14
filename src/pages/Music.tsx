@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useParams } from "react-router-dom";
 import {
   useAudioPreview,
   useCharacterList,
@@ -12,7 +13,9 @@ import { MusicFilter, SongList } from "../components/music";
 const DEFAULT_CHARACTER = "haru-urara";
 
 const Music = () => {
-  const [selected, setSelected] = useState(DEFAULT_CHARACTER);
+  // The singer lives in the URL (/music/<slug>), so each one has its own page.
+  const { slug } = useParams();
+  const selected = slug ?? DEFAULT_CHARACTER;
   const [search, setSearch] = useState("");
   const { playingId, progress, toggle, stop } = useAudioPreview();
 
@@ -41,11 +44,6 @@ const Music = () => {
     [tracks, q],
   );
 
-  const select = (id: string) => {
-    if (id === selected) return;
-    stop();
-    setSelected(id);
-  };
 
   let body: React.ReactNode;
   if (music.isError) {
@@ -71,10 +69,14 @@ const Music = () => {
   return (
     <>
       <Helmet>
-        <title>Music | Urara</title>
+        <title>{slug ? `${selectedName} songs | Urara` : "Music | Urara"}</title>
         <meta
           name="description"
-          content="Browse Umamusume Pretty Derby songs by the character who sings them, search by title, and play previews."
+          content={
+            slug
+              ? `Songs sung by ${selectedName} in Umamusume Pretty Derby, with short previews.`
+              : "Browse Umamusume Pretty Derby songs by the character who sings them, search by title, and play previews."
+          }
         />
       </Helmet>
 
@@ -87,7 +89,7 @@ const Music = () => {
           characters={filters.data?.character ?? []}
           imageByName={imageByName}
           selected={selected}
-          onSelect={select}
+          onSelect={stop}
           isLoading={filters.isLoading}
           isError={filters.isError}
         />

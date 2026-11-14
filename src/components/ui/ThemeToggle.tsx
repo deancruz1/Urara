@@ -5,7 +5,9 @@ import { gateBreak } from "../../lib/gate-break";
 type Theme = "light" | "dark";
 
 const currentTheme = (): Theme =>
-  document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  typeof document !== "undefined" && document.documentElement.dataset.theme === "dark"
+    ? "dark"
+    : "light";
 
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState<Theme>(currentTheme);

@@ -91,7 +91,7 @@ export const CharacterList = ({
             return (
               <li key={c.id}>
                 <Link
-                  to={`/characters?id=${c.id}`}
+                  to={`/characters/${c.preferred_url}`}
                   replace
                   onClick={current ? undefined : onSelect}
                   aria-current={current ? "true" : undefined}

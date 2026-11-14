@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import { useCharacterList } from "../hooks";
 import { CharacterList, CharacterProfile } from "../components/characters";
 
 const Characters = () => {
+  const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const { data: characters, isLoading, isError } = useCharacterList();
   const [search, setSearch] = useState("");
@@ -19,10 +20,12 @@ const Characters = () => {
   );
   const release = useCallback(() => setHeldHeight(undefined), []);
 
-  // The URL is the only source of the selection; unknown ids fall back to
+  // The URL is the only source of the selection; unknown slugs fall back to
   // the first character of the full list.
-  const idParam = Number(searchParams.get("id"));
-  const selected = characters?.find((c) => c.id === idParam) ?? characters?.[0];
+  const selected = characters?.find((c) => c.preferred_url === slug) ?? characters?.[0];
+  // Old links used ?id=; send them to the slug address.
+  const legacyId = searchParams.get("id");
+  const legacy = legacyId ? characters?.find((c) => c.id === Number(legacyId)) : undefined;
 
   const filtered = useMemo(() => {
     if (!characters) return [];
@@ -36,13 +39,21 @@ const Characters = () => {
     );
   }, [characters, search]);
 
+  if (legacy) return <Navigate replace to={`/characters/${legacy.preferred_url}`} />;
+
+  const named = slug && selected?.preferred_url === slug ? selected : undefined;
+
   return (
     <>
       <Helmet>
-        <title>Characters | Urara</title>
+        <title>{named ? `${named.name_en} | Urara` : "Characters | Urara"}</title>
         <meta
           name="description"
-          content="Browse every Umamusume Pretty Derby character: profiles, official colours, voice lines, trivia and outfit artwork."
+          content={
+            named
+              ? `${named.name_en} (${named.name_jp}) from Umamusume Pretty Derby: profile, official colours, voice line, trivia and outfit artwork.`
+              : "Browse every Umamusume Pretty Derby character: profiles, official colours, voice lines, trivia and outfit artwork."
+          }
         />
       </Helmet>
 

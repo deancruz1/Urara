@@ -13,7 +13,8 @@ import News from "./pages/News";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
-  const { pathname } = useLocation();
+  // Keyed per section, so picking another character doesn't remount the page.
+  const section = useLocation().pathname.split("/")[1];
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -21,11 +22,11 @@ const App = () => {
       <SiteHeader />
       <GateStripe />
       <main id="content" tabIndex={-1} className="flex-1">
-        <ErrorBoundary key={pathname}>
+        <ErrorBoundary key={section}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/characters" element={<Characters />} />
-            <Route path="/music" element={<Music />} />
+            <Route path="/characters/:slug?" element={<Characters />} />
+            <Route path="/music/:slug?" element={<Music />} />
             <Route path="/news" element={<News />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

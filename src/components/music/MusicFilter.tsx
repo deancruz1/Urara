@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import type { FilterItem } from "../../types";
 
 interface Props {
   characters: FilterItem[];
   imageByName: Map<string, string>;
   selected: string;
-  onSelect: (id: string) => void;
+  /** Called when a different singer is picked (the link changes the URL). */
+  onSelect: () => void;
   isLoading: boolean;
   isError: boolean;
 }
@@ -21,7 +23,7 @@ export const MusicFilter = ({ characters, imageByName, selected, onSelect, isLoa
   // Bring the selected entry into view inside the list/strip, not the page.
   useEffect(() => {
     const list = listRef.current;
-    const el = list?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    const el = list?.querySelector<HTMLElement>('[aria-current="true"]');
     if (!list || !el) return;
     const l = list.getBoundingClientRect();
     const e = el.getBoundingClientRect();
@@ -73,12 +75,15 @@ export const MusicFilter = ({ characters, imageByName, selected, onSelect, isLoa
             const img = imageByName.get(c.display);
             return (
               <li key={c.id} className="shrink-0">
-                <button
-                  type="button"
-                  aria-pressed={isSelected}
-                  onClick={() => onSelect(c.id)}
-                  className={`flex w-full cursor-pointer items-center gap-2.5 border-0 border-rule py-1.5 pr-3 pl-2 text-left -outline-offset-3 max-lg:h-full max-lg:border-r lg:border-b ${
-                    isSelected ? "bg-ink text-paper" : "bg-paper text-ink hover:bg-tint"
+                <Link
+                  to={`/music/${c.id}`}
+                  replace
+                  aria-current={isSelected ? "true" : undefined}
+                  onClick={isSelected ? undefined : onSelect}
+                  className={`flex w-full items-center gap-2.5 border-0 border-rule py-1.5 pr-3 pl-2 text-left no-underline -outline-offset-3 max-lg:h-full max-lg:border-r lg:border-b ${
+                    isSelected
+                      ? "bg-ink text-paper hover:text-paper"
+                      : "bg-paper text-ink hover:bg-tint hover:text-ink"
                   }`}
                 >
                   {img ? (
@@ -97,7 +102,7 @@ export const MusicFilter = ({ characters, imageByName, selected, onSelect, isLoa
                   <span className="whitespace-nowrap font-cond text-[17px] font-bold uppercase leading-tight lg:truncate">
                     {c.display}
                   </span>
-                </button>
+                </Link>
               </li>
             );
           })}

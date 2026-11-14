@@ -30,7 +30,7 @@ const Featured = ({ c, date }: { c: CharacterInfo; date?: string }) => (
     <Portrait c={c} />
     <div>
       <ProfileLink
-        id={c.id}
+        slug={c.preferred_url}
         className="block font-cond text-[28px] font-bold uppercase leading-none"
       >
         {c.name_en}
@@ -129,7 +129,7 @@ export const BirthdaysSection = ({ characters, isLoading, isError, today }: Prop
                         <Swatches main={first.color_main} sub={first.color_sub} />
                       </td>
                       <td className="px-3 py-2.5">
-                        <ProfileLink id={first.id} className="font-bold">
+                        <ProfileLink slug={first.preferred_url} className="font-bold">
                           {first.name_en}
                         </ProfileLink>{" "}
                         <span className="text-[13px] text-ink-sub max-sm:block">
@@ -139,7 +139,7 @@ export const BirthdaysSection = ({ characters, isLoading, isError, today }: Prop
                               {others.map((o, i) => (
                                 <span key={o.id}>
                                   {i > 0 && ", "}
-                                  <ProfileLink id={o.id} className="text-ink-sub">
+                                  <ProfileLink slug={o.preferred_url} className="text-ink-sub">
                                     {o.name_en}
                                   </ProfileLink>
                                 </span>

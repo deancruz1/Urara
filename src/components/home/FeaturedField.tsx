@@ -72,7 +72,7 @@ export const FeaturedField = ({ characters, isLoading, isError, today }: Props) 
                     />
                   </td>
                   <td className={td}>
-                    <ProfileLink id={c.id} className="block">
+                    <ProfileLink slug={c.preferred_url} className="block">
                       <span className="block font-cond text-[22px] font-bold uppercase leading-[1.1]">
                         {c.name_en}
                       </span>
