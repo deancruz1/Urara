@@ -1,26 +1,34 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
-const NotFound = () => {
-  <Helmet>
-    <title>404 | Urara</title>
-  </Helmet>;
+const NotFound = () => (
+  <>
+    <Helmet>
+      <title>404 | Urara</title>
+      <meta name="description" content="This page doesn't exist." />
+    </Helmet>
 
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-bg-primary px-4 text-center">
-      <p className="text-8xl font-bold text-accent">404</p>
-      <h1 className="text-2xl font-bold text-text-primary">Page not found</h1>
-      <p className="text-text-secondary max-w-sm">
-        Looks like this page doesn't exist. Maybe Haru Urara ran past it.
+    <section className="wrap pt-14">
+      <p
+        aria-hidden="true"
+        className="m-0 font-cond text-[150px] font-extrabold leading-[0.8] tabular-nums"
+      >
+        404
+      </p>
+      <h1 className="mt-6 border-b-[3px] border-ink pb-1.5 font-cond text-4xl font-extrabold uppercase leading-none">
+        Page not found
+      </h1>
+      <p className="mt-4 max-w-[60ch] text-ink-sub">
+        This page doesn't exist. Maybe Haru Urara ran past it.
       </p>
       <Link
         to="/"
-        className="rounded-full bg-accent px-8 py-3 text-sm font-bold text-white transition-opacity duration-200 hover:opacity-80"
+        className="mt-2 inline-block font-bold"
       >
-        Back to Home
+        Back to the home page →
       </Link>
-    </div>
-  );
-};
+    </section>
+  </>
+);
 
 export default NotFound;

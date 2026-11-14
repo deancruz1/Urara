@@ -5,12 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 import App from "./App.tsx";
+import { resolveRedirect } from "./lib/redirect";
 
 const queryClient = new QueryClient();
 
-const params = new URLSearchParams(window.location.search);
-const redirect = params.get("p");
-if (redirect) {
+const redirect = resolveRedirect(window.location.search);
+if (redirect !== null) {
   window.history.replaceState(null, "", redirect);
 }
 

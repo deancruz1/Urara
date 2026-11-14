@@ -3,7 +3,6 @@ import { useState } from "react";
 import Container from "../components/Container";
 import { Helmet } from "react-helmet-async";
 import heroBg from "../assets/home-hero.webp";
-import HomeNavbar from "../components/HomeNavbar";
 import { useNavigate } from "react-router-dom";
 import { useCurrentBirthdays, useCharacterInfo } from "../hooks";
 
@@ -153,25 +152,12 @@ const Home = () => {
       </Helmet>
 
       <div className="min-h-screen bg-bg-primary shadow-xl">
-        {/* Hero Section with integrated navbar */}
-        <section className="relative h-screen w-full overflow-hidden">
-          {/* Content container with flex */}
-          <div className="relative z-10 flex h-full w-full">
-            {/* Left Sidebar Nav */}
-            <div className="lg:w-[15%] z-20 relative">
-              <HomeNavbar />
-            </div>
-
-            {/* Right Content - 85% width with background image */}
-            <div className="w-full lg:w-[85%] relative">
-              {/* Background Image - only in right side */}
-              <img
-                src={heroBg}
-                alt="Hero background"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-          </div>
+        <section className="wrap pt-8">
+          <img
+            src={heroBg}
+            alt="Umamusume key art: a field of characters racing along the rail"
+            className="block h-[440px] w-full object-cover"
+          />
         </section>
 
         {/* Birthdays Section with Tabs */}
