@@ -45,4 +45,23 @@ describe("sanitize", () => {
   it("drops style and class attributes", () => {
     expect(sanitize('<span style="color:red" class="x">t</span>')).toBe("<span>t</span>");
   });
+
+  it("keeps headings, tables and figures but not their attributes", () => {
+    const html =
+      '<h2>Event</h2><h3 class="x">Rewards</h3>' +
+      '<figure class="wp-block-table"><table style="width:100%"><thead><tr><th>Rank</th><th>Reward</th></tr></thead>' +
+      "<tbody><tr><td>1st</td><td>500 Jewels</td></tr></tbody></table><figcaption>Note</figcaption></figure>";
+    expect(sanitize(html)).toBe(
+      "<h2>Event</h2><h3>Rewards</h3>" +
+        "<figure><table><thead><tr><th>Rank</th><th>Reward</th></tr></thead>" +
+        "<tbody><tr><td>1st</td><td>500 Jewels</td></tr></tbody></table><figcaption>Note</figcaption></figure>",
+    );
+  });
+
+  it("still strips scripts and handlers inside tables", () => {
+    const out = sanitize('<table><tr><td onclick="alert(1)">x<script>alert(2)</script></td></tr></table>');
+    expect(out).not.toContain("onclick");
+    expect(out).not.toContain("script");
+    expect(out).toContain("<td>x</td>");
+  });
 });
