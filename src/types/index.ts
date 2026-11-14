@@ -97,7 +97,7 @@ export interface MusicFilterResponse {
 
 export interface CharacterDetail {
   id: number;
-  game_id: number;
+  game_id: number | null;
   name_en: string;
   name_jp: string;
   name_en_internal: string;
@@ -106,30 +106,30 @@ export interface CharacterDetail {
   category_label_en: string;
   color_main: string;
   color_sub: string;
-  thumb_img: string;
-  sns_icon: string;
-  sns_header: string;
-  detail_img_pc: string;
-  detail_img_sp: string;
-  profile: string;
-  slogan: string;
-  strengths: string;
-  weaknesses: string;
-  ears_fact: string;
-  tail_fact: string;
-  family_fact: string;
-  residence: string;
-  grade: string;
-  height: number;
-  weight: string;
-  size_b: number;
-  size_w: number;
-  size_h: number;
-  shoe_size: string;
-  birth_day: number;
-  birth_month: number;
-  voice: string;
-  link: string;
+  thumb_img: string | null;
+  sns_icon: string | null;
+  sns_header: string | null;
+  detail_img_pc: string | null;
+  detail_img_sp: string | null;
+  profile: string | null;
+  slogan: string | null;
+  strengths: string | null;
+  weaknesses: string | null;
+  ears_fact: string | null;
+  tail_fact: string | null;
+  family_fact: string | null;
+  residence: string | null;
+  grade: string | null;
+  height: number | null;
+  weight: string | null;
+  size_b: number | null;
+  size_w: number | null;
+  size_h: number | null;
+  shoe_size: string | null;
+  birth_day: number | null;
+  birth_month: number | null;
+  voice: string | null;
+  link: string | null;
   row_number: number;
 }
 

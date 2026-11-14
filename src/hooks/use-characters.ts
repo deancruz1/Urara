@@ -5,7 +5,12 @@ import {
   getCharacterImages,
   getCharacterInfo,
 } from "../api";
-import type { CharacterInfo, CharacterListItem } from "../types";
+import type {
+  CharacterDetail,
+  CharacterImageSet,
+  CharacterInfo,
+  CharacterListItem,
+} from "../types";
 
 export const useCharacterList = () => {
   return useQuery<CharacterListItem[]>({
@@ -16,7 +21,7 @@ export const useCharacterList = () => {
 };
 
 export const useCharacter = (charaId: number) => {
-  return useQuery({
+  return useQuery<CharacterDetail>({
     queryKey: ["character", charaId],
     queryFn: () => getCharacter(charaId),
     enabled: !!charaId,
@@ -25,7 +30,7 @@ export const useCharacter = (charaId: number) => {
 };
 
 export const useCharacterImages = (charaId: number) => {
-  return useQuery({
+  return useQuery<CharacterImageSet[]>({
     queryKey: ["character-images", charaId],
     queryFn: () => getCharacterImages(charaId),
     enabled: !!charaId,
