@@ -73,18 +73,18 @@ export const Introduction = ({ d }: { d: CharacterDetail }) => {
   const playing = playingId === "voice";
   return (
     <div>
-      <SectionHeading level={3} title="In her words" ja="自己紹介" />
+      <SectionHeading level={3} title="Introduction" ja="自己紹介" />
       {profile && (
         <p lang={langOf(profile)} className="mt-3 mb-0 text-lg font-medium leading-[1.7]">
-          “{profile}”
+          {profile}
         </p>
       )}
       {d.voice && (
-        <div className="mt-3.5 flex items-center gap-3.5">
+        <div className={`flex items-center gap-3.5 ${profile ? "mt-4 border-t border-rule pt-4" : "mt-3.5"}`}>
           <button
             type="button"
             onClick={() => toggle("voice", d.voice!)}
-            aria-label={playing ? "Pause voice line" : "Play voice line"}
+            aria-label={playing ? "Pause voice sample" : "Play voice sample"}
             className={`flex h-11 shrink-0 cursor-pointer items-center gap-2.5 border-0 px-4 font-bold text-paper ${
               playing ? "bg-turf" : "bg-ink hover:bg-turf-dark"
             }`}
@@ -99,7 +99,7 @@ export const Introduction = ({ d }: { d: CharacterDetail }) => {
                 <path d="M7 4v16l13-8z" />
               </svg>
             )}
-            Voice line
+            Voice sample
           </button>
           <div className="flex-1">{playing && <ProgressBar value={progress} />}</div>
         </div>

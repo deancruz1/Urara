@@ -11,3 +11,4 @@ export { ScrollTable } from "./ScrollTable";
 export { Dialog } from "./Dialog";
 export { PlayButton } from "./PlayButton";
 export { ProgressBar } from "./ProgressBar";
+export { ThemeToggle } from "./ThemeToggle";

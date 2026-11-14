@@ -23,7 +23,7 @@ export const NewsPostDialog = ({ post, onClose }: Props) => {
       className="w-[48rem] border-[3px] border-ink bg-paper text-ink"
     >
       {post && (
-        <div className="max-h-[calc(90vh-6px)] overflow-y-auto">
+        <div>
           {post.image && (
             <img
               src={post.image}

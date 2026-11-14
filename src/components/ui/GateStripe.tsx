@@ -1,6 +1,6 @@
 const GATES = [
-  "bg-gate-1 border-b border-ink",
-  "bg-gate-2",
+  "bg-gate-1 border-b border-gate-ink",
+  "bg-gate-2 dark:border-b dark:border-white",
   "bg-gate-3",
   "bg-gate-4",
   "bg-gate-5",

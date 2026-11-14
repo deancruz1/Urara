@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
   --color-paper: #ffffff;
   --color-ink: #111511;
@@ -9,6 +11,11 @@
   --color-turf: #0b6b3a;
   --color-turf-dark: #074a28;
   --color-focus: #f08300;
+  --color-grid: #dde4de;
+
+  /* Same in both themes: the header/footer green and text on gate colours. */
+  --color-header: #0b6b3a;
+  --color-gate-ink: #111511;
 
   --color-gate-1: #ffffff;
   --color-gate-2: #111511;
@@ -20,6 +27,13 @@
   --color-gate-8: #f28db2;
 
   --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-fade: fade 0.25s ease-out;
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
 
   @keyframes fade-in {
     from {
@@ -45,6 +59,56 @@
   @media (width >= 45rem) {
     padding-inline: 24px;
   }
+}
+
+:root[data-theme="dark"] {
+  --color-paper: #0f1410;
+  --color-ink: #e8ede8;
+  --color-ink-sub: #a9b5ad;
+  --color-rule: #2a332c;
+  --color-tint: #18201a;
+  --color-grid: #222b24;
+  --color-turf: #5cbf86;
+  --color-turf-dark: #8fd6ac;
+  color-scheme: dark;
+}
+
+/* Theme switch (see lib/gate-break.ts). The old page sits on top and is clipped
+   by its own group box as that box slides right. */
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(*) {
+  animation: none;
+}
+
+::view-transition-group(page-old) {
+  z-index: 1;
+  overflow: clip;
+}
+
+::view-transition-group(page-old),
+::view-transition-image-pair(page-old) {
+  transform-origin: 0 0;
+}
+
+::view-transition-group(gate-lane-0),
+::view-transition-group(gate-lane-1),
+::view-transition-group(gate-lane-2),
+::view-transition-group(gate-lane-3),
+::view-transition-group(gate-lane-4),
+::view-transition-group(gate-lane-5),
+::view-transition-group(gate-lane-6),
+::view-transition-group(gate-lane-7) {
+  z-index: 2;
+}
+
+.theme-switching,
+.theme-switching * {
+  transition: none !important;
 }
 
 @layer base {
@@ -77,6 +141,36 @@
   main:focus {
     outline: none;
   }
+
+  a,
+  button,
+  input {
+    transition-property: color, background-color, border-color, opacity;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-out;
+  }
+}
+
+/* Dialogs open with a short fade and lift; closing stays instant. */
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+dialog[open] {
+  animation: dialog-in 0.2s ease-out;
+}
+
+dialog[open]::backdrop {
+  animation: backdrop-in 0.2s ease-out;
 }
 
 @layer base {
@@ -86,8 +180,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-in {
+  .animate-fade-in,
+  .animate-fade,
+  dialog[open],
+  dialog[open]::backdrop {
     animation: none;
+  }
+
+  a,
+  button,
+  input {
+    transition: none;
   }
 }
 

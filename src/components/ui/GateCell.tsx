@@ -1,12 +1,12 @@
 const GATE_STYLES: Record<number, string> = {
-  1: "bg-gate-1 text-ink outline-2 -outline-offset-2 outline-ink",
-  2: "bg-gate-2 text-paper",
-  3: "bg-gate-3 text-paper",
-  4: "bg-gate-4 text-paper",
-  5: "bg-gate-5 text-ink",
-  6: "bg-gate-6 text-paper",
-  7: "bg-gate-7 text-ink",
-  8: "bg-gate-8 text-ink",
+  1: "bg-gate-1 text-gate-ink outline-2 -outline-offset-2 outline-gate-ink",
+  2: "bg-gate-2 text-white dark:outline-2 dark:-outline-offset-2 dark:outline-white",
+  3: "bg-gate-3 text-white",
+  4: "bg-gate-4 text-white",
+  5: "bg-gate-5 text-gate-ink",
+  6: "bg-gate-6 text-white",
+  7: "bg-gate-7 text-gate-ink",
+  8: "bg-gate-8 text-gate-ink",
 };
 
 interface GateCellProps {

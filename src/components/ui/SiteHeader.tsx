@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { formatHeaderDate } from "../../lib/jst";
+import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
   { to: "/characters", label: "Characters", ja: "ウマ娘" },
@@ -16,7 +17,7 @@ const skipToContent = (e: React.MouseEvent<HTMLAnchorElement>) => {
 };
 
 export const SiteHeader = () => (
-  <header className="bg-turf text-paper">
+  <header className="bg-header text-white">
     <a
       href="#content"
       onClick={skipToContent}
@@ -27,7 +28,7 @@ export const SiteHeader = () => (
     <div className="wrap flex min-h-[68px] flex-wrap items-center justify-between gap-x-4">
       <Link
         to="/"
-        className="flex items-baseline gap-3 py-2 text-paper no-underline hover:text-paper"
+        className="flex items-baseline gap-3 py-2 text-white no-underline hover:text-white"
       >
         <span className="font-cond text-[30px] font-extrabold tracking-[0.08em]">
           URARA
@@ -39,14 +40,14 @@ export const SiteHeader = () => (
 
       <nav
         aria-label="Main"
-        className="flex w-full justify-between gap-1 sm:w-auto sm:justify-start"
+        className="flex w-full justify-between gap-1 max-sm:order-last sm:w-auto sm:justify-start"
       >
         {NAV.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `flex flex-col items-center border-b-4 px-3.5 py-2 text-paper no-underline hover:border-gate-5 hover:text-paper ${
+              `flex flex-col items-center border-b-4 px-3.5 py-2 text-white no-underline hover:border-gate-5 hover:text-white ${
                 isActive ? "border-gate-5" : "border-transparent"
               }`
             }
@@ -61,9 +62,12 @@ export const SiteHeader = () => (
         ))}
       </nav>
 
-      <span className="hidden font-cond text-[17px] font-semibold tracking-[0.04em] tabular-nums sm:inline">
-        {formatHeaderDate()}
-      </span>
+      <div className="flex items-center gap-4">
+        <span className="hidden font-cond text-[17px] font-semibold tracking-[0.04em] tabular-nums sm:inline">
+          {formatHeaderDate()}
+        </span>
+        <ThemeToggle />
+      </div>
     </div>
   </header>
 );

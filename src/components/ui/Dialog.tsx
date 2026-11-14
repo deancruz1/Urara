@@ -68,17 +68,20 @@ export const Dialog = ({
       className={`m-auto max-h-[90vh] max-w-[min(56rem,calc(100vw-2rem))] p-0 backdrop:bg-[rgb(17_21_17/0.8)] ${className}`}
     >
       {open && (
-        <div className="relative">
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={() => ref.current?.close()}
-            className={`absolute right-2 top-2 z-10 grid h-11 w-11 cursor-pointer place-items-center border-2 border-current ${closeClassName}`}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
+        <div className="max-h-[calc(90vh-6px)] overflow-y-auto">
+          {/* Zero-height sticky row: keeps the close button in view and left of the scrollbar. */}
+          <div className="sticky top-0 z-10 flex h-0 justify-end">
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={() => ref.current?.close()}
+              className={`mt-2 mr-2 grid h-11 w-11 shrink-0 cursor-pointer place-items-center border-2 border-current ${closeClassName}`}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
           {children}
         </div>
       )}
