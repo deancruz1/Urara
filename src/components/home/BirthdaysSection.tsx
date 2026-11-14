@@ -99,7 +99,7 @@ export const BirthdaysSection = ({ characters, isLoading, isError, today }: Prop
             )}
           </div>
 
-          <div className="min-w-0 flex-[1_1_520px] overflow-x-auto">
+          <div className="relative min-w-0 flex-[1_1_520px] overflow-x-auto">
             <table className="w-full border-collapse tabular-nums">
               <caption className="sr-only">Upcoming birthdays</caption>
               <thead>

@@ -12,7 +12,7 @@ export const ScrollTable = ({ label, children, className = "" }: ScrollTableProp
     role="region"
     aria-label={label}
     tabIndex={0}
-    className={`max-w-full overflow-x-auto ${className}`}
+    className={`relative max-w-full overflow-x-auto ${className}`}
   >
     {children}
   </div>
