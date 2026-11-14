@@ -79,26 +79,6 @@
   }
 }
 
-:root {
-  --accent-color: #ec489a; /* default fallback */
-}
-
-.accent-color {
-  color: var(--accent-color);
-}
-
-.accent-bg {
-  background-color: var(--accent-color);
-}
-
-.accent-border {
-  border-color: var(--accent-color);
-}
-
-.accent-ring {
-  ring-color: var(--accent-color);
-}
-
 @layer base {
   html:has(dialog[open]) {
     overflow: hidden;

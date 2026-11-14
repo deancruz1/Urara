@@ -18,12 +18,6 @@ export const getCharacterImages = async (charaId: number) => {
   return res.json()
 }
 
-export const getCharacterMovies = async (charaId: number) => {
-  const res = await fetch(`${BASE_URL}/character/movies/${charaId}`)
-  if (!res.ok) throw new Error('Failed to fetch character movies')
-  return res.json()
-}
-
 export const getCharacterInfo = async () => {
   const res = await fetch(`${BASE_URL}/character/info`)
   if (!res.ok) throw new Error('Failed to fetch character info')

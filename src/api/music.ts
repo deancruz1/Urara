@@ -12,9 +12,3 @@ export const filterMusic = async (params: Record<string, string>) => {
   if (!res.ok) throw new Error("Failed to filter music");
   return res.json();
 };
-
-export const getAlbum = async (albumId: string) => {
-  const res = await fetch(`${BASE_URL}/music/album/${albumId}`);
-  if (!res.ok) throw new Error("Failed to fetch album");
-  return res.json();
-};

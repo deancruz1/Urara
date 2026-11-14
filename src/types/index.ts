@@ -47,14 +47,8 @@ export interface NewsPost {
   post_platform_flag: number;
 }
 
-// Character IDs (from /api/v1/character)
-export interface CharacterId {
-  game_id?: number;
-  web_id: number;
-}
-
 // Music
-export interface MusicSinger {
+interface MusicSinger {
   id: number;
   chara_name_en: string;
   chara_name_jp: string;
@@ -65,7 +59,7 @@ export interface MusicSinger {
   vgmdb_id: number;
 }
 
-export interface MusicAlbum {
+interface MusicAlbum {
   id: number;
   name_en: string;
   name_jp: string;

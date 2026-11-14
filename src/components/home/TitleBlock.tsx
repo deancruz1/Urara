@@ -49,8 +49,8 @@ export const TitleBlock = ({ count, nextBirthday, latestNews }: TitleBlockProps)
     <img
       src={heroBg}
       alt="Umamusume key art: a field of characters racing along the rail"
-      width={2482}
-      height={1434}
+      width={1920}
+      height={1109}
       fetchPriority="high"
       className="block h-[clamp(220px,40vw,440px)] w-full border-[3px] border-t-0 border-ink object-cover object-[center_35%]"
     />

@@ -1,7 +1,7 @@
 import { isJapanese } from "./color";
 
 /** Turns the literal "\n" sequences some API fields contain into spaces. */
-export const cleanText = (text: string) =>
+const cleanText = (text: string) =>
   text.replace(/\\ ?n/g, " ").replace(/\n/g, " ").trim();
 
 /** Non-empty text from the API, or null. */

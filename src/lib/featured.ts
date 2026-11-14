@@ -1,6 +1,6 @@
 import { pad2, type JSTDate } from "./jst";
 
-export interface FeaturedCandidate {
+interface FeaturedCandidate {
   id: number;
   category_label_en: string;
   thumb_img: string | null;

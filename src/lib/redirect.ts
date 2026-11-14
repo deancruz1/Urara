@@ -1,4 +1,4 @@
-export const BASE_PATH = "/Urara/";
+const BASE_PATH = "/Urara/";
 
 /**
  * GitHub Pages serves 404.html for deep links, which forwards the original

@@ -1,5 +1,5 @@
 /** Curated songs for the home page's "Winning Live" list. */
-export interface FeaturedTrack {
+interface FeaturedTrack {
   id: number;
   /** Japanese title */
   name: string;

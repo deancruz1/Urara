@@ -1,13 +1,13 @@
 import type { JSTDate } from "./jst";
 
-export interface HasBirthday {
+interface HasBirthday {
   birth_month: number | null;
   birth_day: number | null;
 }
 
 type Dated<T> = T & { birth_month: number; birth_day: number };
 
-export interface BirthdayGroup<T> {
+interface BirthdayGroup<T> {
   month: number;
   day: number;
   /** Days from today; 0 is today. */
