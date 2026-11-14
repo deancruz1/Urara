@@ -1,9 +1,8 @@
-import { SectionHeading, Swatches } from "../ui";
+import { ColLabel, SectionHeading, Swatches } from "../ui";
 import { mmdd } from "../../lib/format";
 import { todaysBirthdays, upcomingGroups } from "../../lib/birthdays";
 import type { JSTDate } from "../../lib/jst";
 import type { CharacterInfo } from "../../types";
-import { MonthChart } from "./MonthChart";
 import { ProfileLink } from "./CharacterName";
 
 interface Props {
@@ -104,20 +103,17 @@ export const BirthdaysSection = ({ characters, isLoading, isError, today }: Prop
               <caption className="sr-only">Upcoming birthdays</caption>
               <thead>
                 <tr className="bg-ink text-xs text-paper">
-                  <th scope="col" className="whitespace-nowrap px-3 py-2.5 text-left font-bold">
-                    <span lang="ja">日付</span>
-                    <span className="sr-only"> (date)</span>
+                  <th scope="col" className="whitespace-nowrap px-3 py-2 text-left font-bold">
+                    <ColLabel ja="日付" en="Date" />
                   </th>
-                  <th scope="col" className="whitespace-nowrap px-3 py-2.5 text-left font-bold">
-                    <span lang="ja">勝負服</span>
-                    <span className="sr-only"> (colours)</span>
+                  <th scope="col" className="whitespace-nowrap px-3 py-2 text-left font-bold">
+                    <ColLabel ja="勝負服" en="Colours" />
                   </th>
-                  <th scope="col" className="whitespace-nowrap px-3 py-2.5 text-left font-bold">
-                    Name
+                  <th scope="col" className="whitespace-nowrap px-3 py-2 text-left font-bold">
+                    <ColLabel ja="名前" en="Name" />
                   </th>
-                  <th scope="col" className="whitespace-nowrap px-3 py-2.5 text-right font-bold">
-                    <span lang="ja">あと</span>
-                    <span className="sr-only"> (days to go)</span>
+                  <th scope="col" className="whitespace-nowrap px-3 py-2 text-right font-bold">
+                    <ColLabel ja="あと" en="Days to go" />
                   </th>
                 </tr>
               </thead>
@@ -165,8 +161,6 @@ export const BirthdaysSection = ({ characters, isLoading, isError, today }: Prop
             </table>
           </div>
         </div>
-
-        <MonthChart characters={characters} month={today.month} />
       </>
     );
   }

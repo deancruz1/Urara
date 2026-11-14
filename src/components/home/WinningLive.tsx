@@ -33,13 +33,15 @@ export const WinningLive = () => {
                 className="h-14 w-14 shrink-0 object-cover"
               />
               <div className="min-w-0 flex-1">
-                <div lang="ja" className={`text-base font-bold leading-[1.3] ${playing ? "text-turf" : ""}`}>
-                  {t.name}
+                <div className={`text-base font-bold leading-[1.3] ${playing ? "text-turf" : ""}`}>
+                  {t.name_en}
                 </div>
-                <div className="text-[13px] text-ink-sub">
-                  {t.name_en !== t.name && <>{t.name_en} · </>}
-                  {t.artist}
-                </div>
+                {t.name_en !== t.name && (
+                  <div lang="ja" className="text-[13px]">
+                    {t.name}
+                  </div>
+                )}
+                <div className="text-[13px] text-ink-sub">{t.artist}</div>
                 {playing && <ProgressBar value={progress} />}
               </div>
             </li>

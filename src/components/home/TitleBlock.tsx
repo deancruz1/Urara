@@ -6,10 +6,11 @@ interface TitleBlockProps {
   latestNews: string | undefined;
 }
 
-const Stat = ({ ja, value }: { ja: string; value: string | undefined }) => (
+const Stat = ({ ja, en, value }: { ja: string; en: string; value: string | undefined }) => (
   <>
-    <dt lang="ja" className="text-xs font-bold text-ink-sub">
-      {ja}
+    <dt className="text-xs font-bold leading-tight text-ink-sub">
+      <span lang="ja">{ja}</span>
+      <small className="block font-cond text-xs font-semibold uppercase tracking-[0.06em]">{en}</small>
     </dt>
     <dd className="m-0 text-right font-cond text-xl font-bold tabular-nums">
       {value ?? "—"}
@@ -33,13 +34,9 @@ export const TitleBlock = ({ count, nextBirthday, latestNews }: TitleBlockProps)
           Umamusume Pretty Derby fan guide
         </h1>
       </div>
-      <dl className="m-0 grid flex-[1_1_260px] grid-cols-[auto_1fr] content-center gap-x-4 gap-y-1.5 border-ink px-5.5 py-4.5 max-[47rem]:border-t-[3px] min-[47rem]:flex-[0_1_260px] min-[47rem]:border-l-[3px]">
-        <Stat ja="次の誕生日" value={nextBirthday} />
-        <Stat ja="最新ニュース" value={latestNews} />
-        <dt lang="ja" className="text-xs font-bold text-ink-sub">
-          楽曲
-        </dt>
-        <dd className="m-0 text-right font-cond text-xl font-bold">Previews</dd>
+      <dl className="m-0 grid flex-[1_1_260px] grid-cols-[auto_1fr] content-center items-center gap-x-4 gap-y-3 border-ink px-5.5 py-4.5 max-[47rem]:border-t-[3px] min-[47rem]:flex-[0_1_260px] min-[47rem]:border-l-[3px]">
+        <Stat ja="次の誕生日" en="Next birthday" value={nextBirthday} />
+        <Stat ja="最新ニュース" en="Latest news" value={latestNews} />
       </dl>
     </div>
     <img

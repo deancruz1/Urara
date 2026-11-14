@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { SectionHeading } from "../ui";
 import { isJapanese } from "../../lib/color";
 import { LabelChip } from "../news";
-import { newsMMDD } from "../../lib/format";
+import { isUpdated, lastActivity, newsMMDD } from "../../lib/format";
 import type { NewsPost } from "../../types";
 
 interface Props {
@@ -33,7 +33,10 @@ export const NewsPreview = ({ posts, isLoading, isError }: Props) => (
               className="grid grid-cols-[56px_1fr] gap-x-3.5 gap-y-1 border-b border-rule py-3.5 last:border-b-0"
             >
               <span className="font-cond text-xl font-bold leading-[1.2] tabular-nums">
-                {newsMMDD(p.post_at)}
+                {newsMMDD(lastActivity(p))}
+                {isUpdated(p) && (
+                  <small className="block font-body text-[11px] font-bold text-ink-sub">Updated</small>
+                )}
               </span>
               <Link
                 to={`/news?post=${p.announce_id}`}

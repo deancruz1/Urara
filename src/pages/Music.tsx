@@ -57,7 +57,15 @@ const Music = () => {
   } else if (shown.length === 0) {
     body = <p className="mt-4 text-ink-sub">No songs match “{search.trim()}”.</p>;
   } else {
-    body = <SongList tracks={shown} playingId={playingId} progress={progress} onToggle={toggle} />;
+    body = (
+      <SongList
+        tracks={shown}
+        singer={selectedName}
+        playingId={playingId}
+        progress={progress}
+        onToggle={toggle}
+      />
+    );
   }
 
   return (
@@ -103,7 +111,7 @@ const Music = () => {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search songs"
             autoComplete="off"
-            className="mt-4 block h-12 w-full border-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
+            className="mt-4 block h-12 w-full border-0 border-b-2 border-ink bg-tint px-3 -outline-offset-4 focus-visible:bg-paper"
           />
           {body}
         </section>

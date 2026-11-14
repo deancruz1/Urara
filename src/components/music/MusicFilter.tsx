@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FilterItem } from "../../types";
 
 interface Props {
@@ -13,6 +13,10 @@ interface Props {
 /** Character filter: a race-card list on wide screens, a sideways strip on phones. */
 export const MusicFilter = ({ characters, imageByName, selected, onSelect, isLoading, isError }: Props) => {
   const listRef = useRef<HTMLUListElement>(null);
+  const [search, setSearch] = useState("");
+
+  const q = search.trim().toLowerCase();
+  const shown = q ? characters.filter((c) => c.display.toLowerCase().includes(q)) : characters;
 
   // Bring the selected entry into view inside the list/strip, not the page.
   useEffect(() => {
@@ -32,25 +36,39 @@ export const MusicFilter = ({ characters, imageByName, selected, onSelect, isLoa
   return (
     <aside
       aria-labelledby="music-filter-heading"
-      className="flex w-full min-w-0 flex-col border-[3px] border-ink bg-paper lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:w-[280px] lg:shrink-0"
+      className="flex w-full min-w-0 flex-col bg-paper lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:w-[280px] lg:shrink-0"
     >
       <h2
         id="music-filter-heading"
-        className="m-0 flex shrink-0 items-baseline gap-2 bg-ink px-3 py-1.5 text-xs font-bold text-paper"
+        className="m-0 flex shrink-0 items-baseline gap-2 border-b-[3px] border-ink pb-1.5 text-xs font-bold"
       >
-        <span className="font-cond text-[15px] uppercase tracking-[0.04em]">Singer</span>
+        <span className="font-cond text-[22px] font-extrabold uppercase leading-none">Singer</span>
         <span lang="ja">歌唱</span>
       </h2>
+      <label htmlFor="singer-search" className="sr-only">
+        Search singers
+      </label>
+      <input
+        id="singer-search"
+        type="search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search singers"
+        autoComplete="off"
+        className="mt-3 block h-12 w-full shrink-0 border-0 border-b-2 border-ink bg-tint px-3 -outline-offset-4 focus-visible:bg-paper"
+      />
       {isError ? (
         <p className="m-0 px-3 py-3 text-sm text-ink-sub">Couldn't load characters.</p>
       ) : isLoading ? (
         <p className="m-0 px-3 py-3 text-sm text-ink-sub">Loading characters…</p>
+      ) : shown.length === 0 ? (
+        <p className="m-0 px-3 py-3 text-sm text-ink-sub">No singers match “{search.trim()}”.</p>
       ) : (
         <ul
           ref={listRef}
           className="relative m-0 flex list-none overflow-x-auto p-0 lg:flex-1 lg:flex-col lg:overflow-x-visible lg:overflow-y-auto"
         >
-          {characters.map((c) => {
+          {shown.map((c) => {
             const isSelected = c.id === selected;
             const img = imageByName.get(c.display);
             return (

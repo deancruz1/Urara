@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useCharacterInfo, useLatestNews } from "../hooks";
 import { todayJST } from "../lib/jst";
 import { todaysBirthdays, upcomingGroups } from "../lib/birthdays";
-import { mmdd, newsMMDD } from "../lib/format";
+import { lastActivity, mmdd, newsMMDD } from "../lib/format";
 import { TitleBlock } from "../components/home/TitleBlock";
 import { BirthdaysSection } from "../components/home/BirthdaysSection";
 import { FeaturedField } from "../components/home/FeaturedField";
@@ -40,7 +40,7 @@ const Home = () => {
       <TitleBlock
         count={characters?.length}
         nextBirthday={nextBirthday}
-        latestNews={latest ? newsMMDD(latest.post_at) : undefined}
+        latestNews={latest ? newsMMDD(lastActivity(latest)) : undefined}
       />
       <BirthdaysSection
         characters={characters}

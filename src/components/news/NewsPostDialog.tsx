@@ -1,6 +1,6 @@
 import { Dialog } from "../ui";
 import { sanitize } from "../../lib/sanitize";
-import { newsDateTime } from "../../lib/format";
+import { isUpdated, newsDateTime } from "../../lib/format";
 import { langOf } from "../../lib/text";
 import type { NewsPost } from "../../types";
 import { LabelChip } from "./LabelChip";
@@ -39,8 +39,14 @@ export const NewsPostDialog = ({ post, onClose }: Props) => {
             <p className="m-0 flex flex-wrap items-center gap-2.5 pr-12">
               <LabelChip post={post} />
               <span className="font-cond text-lg font-bold tabular-nums">
+                {isUpdated(post) ? "Posted " : ""}
                 {newsDateTime(post.post_at)}
               </span>
+              {isUpdated(post) && (
+                <span className="font-cond text-lg font-bold tabular-nums">
+                  · Updated {newsDateTime(post.update_at!)}
+                </span>
+              )}
             </p>
             <h2
               lang={post.title_english ? undefined : langOf(title)}

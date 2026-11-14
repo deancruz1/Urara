@@ -4,6 +4,7 @@ export { SiteFooter } from "./SiteFooter";
 export { ScrollToTop } from "./ScrollToTop";
 export { ErrorBoundary } from "./ErrorBoundary";
 export { SectionHeading } from "./SectionHeading";
+export { ColLabel } from "./ColLabel";
 export { GateCell } from "./GateCell";
 export { Swatches } from "./Swatches";
 export { ScrollTable } from "./ScrollTable";

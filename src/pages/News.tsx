@@ -116,7 +116,7 @@ const News = () => {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search news"
           autoComplete="off"
-          className="mt-6 mb-2 block h-12 w-full border-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
+          className="mt-6 mb-2 block h-12 w-full border-0 border-b-2 border-ink bg-tint px-3 -outline-offset-4 focus-visible:bg-paper"
         />
         {body}
       </section>

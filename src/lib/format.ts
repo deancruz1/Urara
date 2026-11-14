@@ -16,6 +16,14 @@ export const newsDate = (seconds: number) => {
   return `${d.year}.${pad2(d.month)}.${pad2(d.day)}`;
 };
 
+type Dated = { post_at: number; update_at: number | null };
+
+/** True when a post was edited after it went up. */
+export const isUpdated = (post: Dated) => !!post.update_at && post.update_at > post.post_at;
+
+/** When a post last changed. The API orders news by this, so lists show it. */
+export const lastActivity = (post: Dated) => (isUpdated(post) ? post.update_at! : post.post_at);
+
 /** News timestamp as JST `YYYY.MM.DD HH:MM JST`. */
 export const newsDateTime = (seconds: number) => {
   const time = new Intl.DateTimeFormat("en-GB", {

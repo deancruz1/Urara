@@ -20,7 +20,7 @@ export const OutfitGallery = ({ sets, name }: Props) => {
 
   return (
     <div className="min-w-0 flex-[1_1_320px]">
-      <div role="tablist" aria-label="Outfit" className="flex flex-wrap border-[3px] border-b-0 border-ink">
+      <div role="tablist" aria-label="Outfit" className="flex flex-wrap gap-x-5 border-b border-rule">
         {usable.map((s, i) => {
           const selected = s === set;
           return (
@@ -35,8 +35,8 @@ export const OutfitGallery = ({ sets, name }: Props) => {
                 setSetIndex(i);
                 setImageIndex(0);
               }}
-              className={`h-11 flex-[1_1_auto] cursor-pointer border-0 border-r-2 border-ink px-3 font-cond text-base font-bold uppercase tracking-[0.04em] -outline-offset-4 last:border-r-0 ${
-                selected ? "bg-ink text-paper" : "bg-paper text-ink hover:bg-tint"
+              className={`-mb-px h-11 cursor-pointer border-0 border-b-[3px] bg-transparent px-0 font-cond text-base font-bold uppercase tracking-[0.04em] ${
+                selected ? "border-ink text-ink" : "border-transparent text-ink-sub hover:text-ink"
               }`}
             >
               {s.label_en}
@@ -53,7 +53,7 @@ export const OutfitGallery = ({ sets, name }: Props) => {
           type="button"
           onClick={() => setEnlarged(true)}
           aria-label={`Enlarge image: ${alt}`}
-          className="flex h-[clamp(360px,70vw,620px)] w-full cursor-zoom-in items-end justify-center overflow-hidden border-[3px] border-ink bg-tint bg-[repeating-linear-gradient(90deg,transparent_0_59px,#DDE4DE_59px_60px)] p-0"
+          className="mt-3 flex h-[clamp(360px,70vw,620px)] w-full cursor-zoom-in items-end justify-center overflow-hidden border-0 bg-tint bg-[repeating-linear-gradient(90deg,transparent_0_59px,#DDE4DE_59px_60px)] p-0"
         >
           <img
             key={image.image}

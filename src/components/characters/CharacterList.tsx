@@ -45,13 +45,13 @@ export const CharacterList = ({
   return (
     <aside
       aria-label="Character list"
-      className="flex w-full min-w-0 flex-col border-[3px] border-ink bg-paper lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:w-[300px] lg:shrink-0"
+      className="flex w-full min-w-0 flex-col bg-paper lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:w-[300px] lg:shrink-0"
     >
-      <h2 className="m-0 flex shrink-0 items-baseline gap-2 bg-ink px-3 py-1.5 text-xs font-bold text-paper">
-        <span className="font-cond text-[15px] uppercase tracking-[0.04em]">Characters</span>
+      <h2 className="m-0 flex shrink-0 items-baseline gap-2 border-b-[3px] border-ink pb-1.5 text-xs font-bold">
+        <span className="font-cond text-[22px] font-extrabold uppercase leading-none">Characters</span>
         <span lang="ja">出走表</span>
         <span aria-hidden="true">·</span>
-        <span className="font-cond text-[15px] tabular-nums">
+        <span className="font-cond text-[17px] tabular-nums">
           {isLoading ? "—" : searching ? `${characters.length} of ${total}` : total}
         </span>
       </h2>
@@ -65,7 +65,7 @@ export const CharacterList = ({
         onChange={(e) => onSearch(e.target.value)}
         placeholder="Name, ウララ, or category"
         autoComplete="off"
-        className="block h-12 w-full shrink-0 border-0 border-b-[3px] border-ink bg-paper px-3 -outline-offset-4 focus-visible:bg-tint"
+        className="mt-3 block h-12 w-full shrink-0 border-0 border-b-2 border-ink bg-tint px-3 -outline-offset-4 focus-visible:bg-paper"
       />
       <p role="status" className="sr-only">
         {searching && !isLoading ? `${characters.length} characters match` : ""}

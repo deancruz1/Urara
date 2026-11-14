@@ -51,12 +51,9 @@ export const GoodBad = ({ d }: { d: CharacterDetail }) => {
   ].filter((i) => i.text);
   if (items.length === 0) return null;
   return (
-    <div className={`grid border-[3px] border-ink ${items.length === 2 ? "sm:grid-cols-2" : ""}`}>
-      {items.map((i, n) => (
-        <div
-          key={i.en}
-          className={`px-3.5 py-3 ${n > 0 ? "border-ink max-sm:border-t-[3px] sm:border-l-[3px]" : ""}`}
-        >
+    <div className={`grid gap-x-6 border-t-[3px] border-ink ${items.length === 2 ? "sm:grid-cols-2" : ""}`}>
+      {items.map((i) => (
+        <div key={i.en} className="border-b border-rule py-3">
           <small className="block text-xs font-bold text-ink-sub">
             <span lang="ja">{i.ja}</span> · {i.en}
           </small>
@@ -124,9 +121,9 @@ export const Trivia = ({ d }: { d: CharacterDetail }) => {
       <dl className="m-0">
         {facts.map((f) => (
           <div key={f.en} className="grid grid-cols-[64px_1fr] gap-3.5 border-b border-rule py-3">
-            <dt className="h-fit bg-ink py-1 text-center text-[13px] font-bold text-paper">
+            <dt className="h-fit bg-ink py-1 text-center text-[13px] font-bold leading-tight text-paper">
               <span lang="ja">{f.ja}</span>
-              <span className="sr-only"> ({f.en})</span>
+              <small className="block font-cond text-[11px] font-semibold uppercase tracking-[0.06em]">{f.en}</small>
             </dt>
             <dd className="m-0">
               <Value text={f.text!} />
@@ -139,10 +136,6 @@ export const Trivia = ({ d }: { d: CharacterDetail }) => {
 };
 
 export const NoProfileYet = () => (
-  <div className="border-[3px] border-ink bg-tint px-4 py-3.5">
-    <p className="m-0 font-cond text-[22px] font-bold uppercase leading-tight">
-      No English profile yet
-    </p>
-  </div>
+  <p className="m-0 text-ink-sub">No English profile yet.</p>
 );
 

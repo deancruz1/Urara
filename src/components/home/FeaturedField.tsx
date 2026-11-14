@@ -1,4 +1,4 @@
-import { GateCell, ScrollTable, SectionHeading, Swatches } from "../ui";
+import { ColLabel, GateCell, ScrollTable, SectionHeading, Swatches } from "../ui";
 import { featuredField } from "../../lib/featured";
 import { mmdd } from "../../lib/format";
 import type { JSTDate } from "../../lib/jst";
@@ -37,22 +37,23 @@ export const FeaturedField = ({ characters, isLoading, isError, today }: Props) 
             <thead>
               <tr className="border-b-2 border-ink text-xs text-ink-sub">
                 <th scope="col" className={`${th} w-13`}>
-                  <span lang="ja">枠</span>
-                  <span className="sr-only"> (gate)</span>
+                  <ColLabel ja="枠" en="Gate" />
                 </th>
                 <th scope="col" className={`${th} w-18`}>
                   <span className="sr-only">Portrait</span>
                 </th>
-                <th scope="col" className={th}>Name</th>
                 <th scope="col" className={th}>
-                  <span lang="ja">誕生日</span>
-                  <span className="sr-only"> (birthday)</span>
+                  <ColLabel ja="名前" en="Name" />
                 </th>
                 <th scope="col" className={th}>
-                  <span lang="ja">身長</span>
-                  <span className="sr-only"> (height)</span>
+                  <ColLabel ja="誕生日" en="Birthday" />
                 </th>
-                <th scope="col" className={th}>Colours</th>
+                <th scope="col" className={th}>
+                  <ColLabel ja="身長" en="Height" />
+                </th>
+                <th scope="col" className={th}>
+                  <ColLabel ja="勝負服" en="Colours" />
+                </th>
               </tr>
             </thead>
             <tbody>
